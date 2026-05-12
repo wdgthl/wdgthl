@@ -48,7 +48,9 @@ const moodboardImages = [
     "images/moodboard/47.jpg",
     "images/moodboard/48.jpg",
     "images/moodboard/49.jpg",
-    "images/moodboard/50.jpg"
+    "images/moodboard/50.jpg",
+    "images/moodboard/51.jpg"
+    
 ];
 
 const styleImages = [
@@ -101,7 +103,8 @@ const styleImages = [
     "images/style/47.jpg",
     "images/style/48.jpg",
     "images/style/49.jpg",
-    "images/style/50.jpg"
+    "images/style/50.jpg",
+    "images/style/51.jpg"
 ];
 
 const gothicImages = [
@@ -154,7 +157,8 @@ const gothicImages = [
     "images/gothic/47.jpg",
     "images/gothic/48.jpg",
     "images/gothic/49.jpg",
-    "images/gothic/50.jpg"
+    "images/gothic/50.jpg",
+    "images/gothic/51.jpg"
 
 ];
 
