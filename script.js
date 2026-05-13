@@ -385,21 +385,17 @@ function toggleSingleMode(selectedCard) {
         gallery.style.maxWidth = '600px';
         gallery.style.margin = '0 auto';
         
-        // Удаляем все кнопки вне карточек
         const oldButtons = document.querySelectorAll('.container > button, .single-buttons');
         oldButtons.forEach(b => b.remove());
         
-        // Создаём контейнер для кнопок
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'single-buttons';
         buttonContainer.style.cssText = 'display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;';
         
-        // Кнопка Generate One
         const genOneBtn = document.createElement('button');
         genOneBtn.textContent = 'Generate One';
         genOneBtn.setAttribute('onclick', 'generateOne()');
         
-        // Кнопка Undo One
         const undoOneBtn = document.createElement('button');
         undoOneBtn.textContent = '↩ Undo';
         undoOneBtn.id = 'undo-one-btn';
@@ -407,7 +403,6 @@ function toggleSingleMode(selectedCard) {
         undoOneBtn.style.opacity = singleHistoryIndex < 0 ? '0.3' : '1';
         undoOneBtn.style.cursor = singleHistoryIndex < 0 ? 'default' : 'pointer';
         
-        // Кнопка Show All
         const showAllBtn = document.createElement('button');
         showAllBtn.textContent = 'Show All';
         showAllBtn.setAttribute('onclick', 'showAllCards()');
@@ -417,12 +412,16 @@ function toggleSingleMode(selectedCard) {
         buttonContainer.appendChild(showAllBtn);
         gallery.after(buttonContainer);
         
-        // Прячем элементы
+        // Скрываем элементы
         counter.style.display = 'none';
         title.style.display = 'none';
         if (saveBtn) saveBtn.style.display = 'none';
         if (undoAllBtn) undoAllBtn.style.display = 'none';
         if (favoritesSection) favoritesSection.style.display = 'none';
+        
+        // Скрываем логотип
+        const logo = document.querySelector('.logo');
+        if (logo) logo.style.display = 'none';
         
         singleMode = true;
     } else {
@@ -514,6 +513,8 @@ function showAllCards() {
     // Показываем счётчик и заголовок
     counter.style.display = '';
     title.style.display = '';
+    const logo = document.querySelector('.logo');
+ if (logo) logo.style.display = '';
     
     // Показываем избранное
     const favoritesSection = document.querySelector('.favorites-section');

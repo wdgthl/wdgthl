@@ -360,9 +360,11 @@ button:hover {
     }
 
     .logo {
-        width: 28px;
-        top: 12px;
-        left: 12px;
+        width: 22px;
+        top: auto;
+        left: auto;
+        bottom: 14px;
+        right: 14px;
     }
 
     .container {
@@ -398,7 +400,6 @@ button:hover {
         font-size: 14px;
         border-radius: 10px;
     }
-
 }
 /* Кнопка Undo */
 .undo-btn {
