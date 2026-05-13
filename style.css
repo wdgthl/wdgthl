@@ -359,6 +359,12 @@ button:hover {
         overflow-x: hidden;
     }
 
+    .logo {
+        width: 28px;
+        top: 12px;
+        left: 12px;
+    }
+
     .container {
         padding: 10px;
     }
@@ -392,6 +398,7 @@ button:hover {
         font-size: 14px;
         border-radius: 10px;
     }
+
 }
 /* Кнопка Undo */
 .undo-btn {
