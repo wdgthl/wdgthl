@@ -39,6 +39,22 @@ body {
     min-height: 100vh;
 }
 
+/* Логотип */
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 100;
+    width: 160px;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 1;
+}
+
 .container {
     width: 100%;
     max-width: 1600px;
@@ -202,6 +218,43 @@ button:hover {
     box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
 }
 
+/* Кнопка Undo */
+.undo-btn {
+    margin-top: 12px;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 10px 24px;
+    animation: none;
+    box-shadow: none;
+}
+
+.undo-btn:hover {
+    color: white;
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-2px);
+}
+
+/* Undo в single mode */
+.single-buttons #undo-one-btn {
+    margin: 0;
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.single-buttons #undo-one-btn:hover {
+    color: white;
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+}
+
 /* Избранное */
 .favorites-section {
     margin-top: 48px;
@@ -360,11 +413,11 @@ button:hover {
     }
 
     .logo {
-        width: 22px;
-        top: auto;
-        left: auto;
-        bottom: 14px;
-        right: 14px;
+        width: 22px !important;
+        top: auto !important;
+        left: auto !important;
+        bottom: 14px !important;
+        right: 14px !important;
     }
 
     .container {
@@ -400,54 +453,4 @@ button:hover {
         font-size: 14px;
         border-radius: 10px;
     }
-}
-/* Кнопка Undo */
-.undo-btn {
-    margin-top: 12px;
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    font-size: 12px;
-    letter-spacing: 2px;
-    padding: 10px 24px;
-    animation: none;
-    box-shadow: none;
-}
-
-.undo-btn:hover {
-    color: white;
-    border-color: rgba(255,255,255,0.5);
-    background: rgba(255,255,255,0.05);
-    transform: translateY(-2px);
-}
-
-/* Undo в single mode */
-.single-buttons #undo-one-btn {
-    margin: 0;
-    padding: 12px 24px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.single-buttons #undo-one-btn:hover {
-    color: white;
-    border-color: rgba(255,255,255,0.5);
-    background: rgba(255,255,255,0.05);
-}
-.logo {
-    position: fixed;
-    top: 20px;
-    left: 24px;
-    z-index: 100;
-    width: 160px;
-    height: auto;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.logo:hover {
-    opacity: 1;
 }
