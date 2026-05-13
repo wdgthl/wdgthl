@@ -1,4 +1,9 @@
 let count = 1;
+// История для Undo
+let history = [];
+let historyIndex = -1;
+let singleHistory = [];
+let singleHistoryIndex = -1;
 
 const moodboardImages = [
     "images/moodboard/1.jpg",
@@ -51,117 +56,8 @@ const moodboardImages = [
     "images/moodboard/48.jpg",
     "images/moodboard/49.jpg",
     "images/moodboard/50.jpg",
-    "images/moodboard/51.jpg",
-    "images/moodboard/52.jpg",
-    "images/moodboard/53.jpg",
-    "images/moodboard/54.jpg",
-    "images/moodboard/55.jpg",
-    "images/moodboard/56.jpg",
-    "images/moodboard/57.jpg",
-    "images/moodboard/58.jpg",
-    "images/moodboard/59.jpg",
-    "images/moodboard/60.jpg",
-    "images/moodboard/61.jpg",
-    "images/moodboard/62.jpg",
-    "images/moodboard/63.jpg",
-    "images/moodboard/64.jpg",
-    "images/moodboard/65.jpg",
-    "images/moodboard/66.jpg",
-    "images/moodboard/67.jpg",
-    "images/moodboard/68.jpg",
-    "images/moodboard/69.jpg",
-    "images/moodboard/70.jpg",
-    "images/moodboard/71.jpg",
-    "images/moodboard/72.jpg",
-    "images/moodboard/73.jpg",
-    "images/moodboard/74.jpg",
-    "images/moodboard/75.jpg",
-    "images/moodboard/76.jpg",
-    "images/moodboard/77.jpg",
-    "images/moodboard/78.jpg",
-    "images/moodboard/79.jpg",
-    "images/moodboard/80.jpg",
-    "images/moodboard/81.jpg",
-    "images/moodboard/82.jpg",
-    "images/moodboard/83.jpg",
-    "images/moodboard/84.jpg",
-    "images/moodboard/85.jpg",
-    "images/moodboard/86.jpg",
-    "images/moodboard/87.jpg",
-    "images/moodboard/88.jpg",
-    "images/moodboard/89.jpg",
-    "images/moodboard/90.jpg",
-    "images/moodboard/91.jpg",
-    "images/moodboard/92.jpg",
-    "images/moodboard/93.jpg",
-    "images/moodboard/94.jpg",
-    "images/moodboard/95.jpg",
-    "images/moodboard/96.jpg",
-    "images/moodboard/97.jpg",
-    "images/moodboard/98.jpg",
-    "images/moodboard/99.jpg",
-    "images/moodboard/100.jpg",
-    "images/moodboard/101.jpg",
-    "images/moodboard/102.jpg",
-    "images/moodboard/103.jpg",
-    "images/moodboard/104.jpg",
-    "images/moodboard/105.jpg",
-    "images/moodboard/106.jpg",
-    "images/moodboard/107.jpg",
-    "images/moodboard/108.jpg",
-    "images/moodboard/109.jpg",
-    "images/moodboard/110.jpg",
-    "images/moodboard/111.jpg",
-    "images/moodboard/112.jpg",
-    "images/moodboard/113.jpg",
-    "images/moodboard/114.jpg",
-    "images/moodboard/115.jpg",
-    "images/moodboard/116.jpg",
-    "images/moodboard/117.jpg",
-    "images/moodboard/118.jpg",
-    "images/moodboard/119.jpg",
-    "images/moodboard/120.jpg",
-    "images/moodboard/121.jpg",
-    "images/moodboard/122.jpg",
-    "images/moodboard/123.jpg",
-    "images/moodboard/124.jpg",
-    "images/moodboard/125.jpg",
-    "images/moodboard/126.jpg",
-    "images/moodboard/127.jpg",
-    "images/moodboard/128.jpg",
-    "images/moodboard/129.jpg",
-    "images/moodboard/130.jpg",
-    "images/moodboard/131.jpg",
-    "images/moodboard/132.jpg",
-    "images/moodboard/133.jpg",
-    "images/moodboard/134.jpg",
-    "images/moodboard/135.jpg",
-    "images/moodboard/136.jpg",
-    "images/moodboard/137.jpg",
-    "images/moodboard/138.jpg",
-    "images/moodboard/139.jpg",
-    "images/moodboard/140.jpg",
-    "images/moodboard/141.jpg",
-    "images/moodboard/142.jpg",
-    "images/moodboard/143.jpg",
-    "images/moodboard/144.jpg",
-    "images/moodboard/145.jpg",
-    "images/moodboard/146.jpg",
-    "images/moodboard/147.jpg",
-    "images/moodboard/148.jpg",
-    "images/moodboard/149.jpg",
-    "images/moodboard/150.jpg",
-    "images/moodboard/151.jpg",
-    "images/moodboard/152.jpg",
-    "images/moodboard/153.jpg",
-    "images/moodboard/154.jpg",
-    "images/moodboard/155.jpg",
-    "images/moodboard/156.jpg",
-    "images/moodboard/157.jpg",
-    "images/moodboard/158.jpg",
-    "images/moodboard/159.jpg"
+    "images/moodboard/51.jpg"
 ];
-
 
 const styleImages = [
     "images/style/1.jpg",
@@ -214,57 +110,7 @@ const styleImages = [
     "images/style/48.jpg",
     "images/style/49.jpg",
     "images/style/50.jpg",
-    "images/style/51.jpg",
-    "images/style/52.jpg",
-    "images/style/53.jpg",
-    "images/style/54.jpg",
-    "images/style/55.jpg",
-    "images/style/56.jpg",
-    "images/style/57.jpg",
-    "images/style/58.jpg",
-    "images/style/59.jpg",
-    "images/style/60.jpg",
-    "images/style/61.jpg",
-    "images/style/62.jpg",
-    "images/style/63.jpg",
-    "images/style/64.jpg",
-    "images/style/65.jpg",
-    "images/style/66.jpg",
-    "images/style/67.jpg",
-    "images/style/68.jpg",
-    "images/style/69.jpg",
-    "images/style/70.jpg",
-    "images/style/71.jpg",
-    "images/style/72.jpg",
- "images/style/73.jpg",
- "images/style/74.jpg",
- "images/style/75.jpg",
- "images/style/76.jpg",
- "images/style/77.jpg",
- "images/style/78.jpg",
- "images/style/79.jpg",
- "images/style/80.jpg",
- "images/style/81.jpg",
- "images/style/82.jpg",
- "images/style/83.jpg",
- "images/style/84.jpg",
- "images/style/85.jpg",
- "images/style/86.jpg",
- "images/style/87.jpg",
- "images/style/88.jpg",
- "images/style/89.jpg",
- "images/style/90.jpg",
- "images/style/91.jpg",
- "images/style/92.jpg",
- "images/style/93.jpg",
- "images/style/94.jpg",
- "images/style/95.jpg",
- "images/style/96.jpg",
- "images/style/97.jpg",
- "images/style/98.jpg",
- "images/style/99.jpg",
- "images/style/100.jpg"
-
+    "images/style/51.jpg"
 ];
 
 const gothicImages = [
@@ -318,57 +164,7 @@ const gothicImages = [
     "images/gothic/48.jpg",
     "images/gothic/49.jpg",
     "images/gothic/50.jpg",
-    "images/gothic/51.jpg",
- "images/gothic/52.jpg",
- "images/gothic/53.jpg",
- "images/gothic/54.jpg",
- "images/gothic/55.jpg",
- "images/gothic/56.jpg",
- "images/gothic/57.jpg",
- "images/gothic/58.jpg",
- "images/gothic/59.jpg",
- "images/gothic/60.jpg",
- "images/gothic/61.jpg",
- "images/gothic/62.jpg",
- "images/gothic/63.jpg",
- "images/gothic/64.jpg",
- "images/gothic/65.jpg",
- "images/gothic/66.jpg",
- "images/gothic/67.jpg",
- "images/gothic/68.jpg",
- "images/gothic/69.jpg",
- "images/gothic/70.jpg",
- "images/gothic/71.jpg",
- "images/gothic/72.jpg",
- "images/gothic/73.jpg",
- "images/gothic/74.jpg",
- "images/gothic/75.jpg",
- "images/gothic/76.jpg",
- "images/gothic/77.jpg",
- "images/gothic/78.jpg",
- "images/gothic/79.jpg",
- "images/gothic/80.jpg",
- "images/gothic/81.jpg",
- "images/gothic/82.jpg",
- "images/gothic/83.jpg",
- "images/gothic/84.jpg",
- "images/gothic/85.jpg",
- "images/gothic/86.jpg",
- "images/gothic/87.jpg",
- "images/gothic/88.jpg",
- "images/gothic/89.jpg",
- "images/gothic/90.jpg",
- "images/gothic/91.jpg",
- "images/gothic/92.jpg",
- "images/gothic/93.jpg",
- "images/gothic/94.jpg",
- "images/gothic/95.jpg",
- "images/gothic/96.jpg",
- "images/gothic/97.jpg",
- "images/gothic/98.jpg",
- "images/gothic/99.jpg",
- "images/gothic/100.jpg"
-
+    "images/gothic/51.jpg"
 ];
 
 function randomImage(array) {
@@ -376,17 +172,30 @@ function randomImage(array) {
 }
 
 function generateImages() {
-    const cards = document.querySelectorAll('.card img');
+    // Сохраняем текущее состояние в историю
+    const currentState = {
+        moodboard: document.getElementById("moodboard-img").src,
+        style: document.getElementById("style-img").src,
+        gothic: document.getElementById("gothic-img").src
+    };
     
+    history = history.slice(0, historyIndex + 1);
+    history.push(currentState);
+    historyIndex = history.length - 1;
+    
+    // Ограничиваем историю 20 шагами
+    if (history.length > 20) {
+        history.shift();
+        historyIndex--;
+    }
+    
+    const cards = document.querySelectorAll('.card img');
     cards.forEach(img => img.classList.add('loading'));
     
     setTimeout(() => {
-        document.getElementById("moodboard-img").src =
-            randomImage(moodboardImages);
-        document.getElementById("style-img").src =
-            randomImage(styleImages);
-        document.getElementById("gothic-img").src =
-            randomImage(gothicImages);
+        document.getElementById("moodboard-img").src = randomImage(moodboardImages);
+        document.getElementById("style-img").src = randomImage(styleImages);
+        document.getElementById("gothic-img").src = randomImage(gothicImages);
     }, 200);
     
     setTimeout(() => {
@@ -400,6 +209,8 @@ function generateImages() {
     localStorage.setItem('style', document.getElementById("style-img").src);
     localStorage.setItem('gothic', document.getElementById("gothic-img").src);
     localStorage.setItem('genCount', count);
+    
+    updateUndoButtons();
 }
 
 function loadSavedImages() {
@@ -431,6 +242,7 @@ function loadSavedImages() {
 }
 
 loadSavedImages();
+
 // === ЧАСТИЦЫ НА ФОНЕ ===
 
 const canvas = document.getElementById('particles');
@@ -439,7 +251,6 @@ const ctx = canvas.getContext('2d');
 let particles = [];
 let mouse = { x: null, y: null, radius: 100 };
 
-// Размер canvas на весь экран
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -448,19 +259,16 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-// Отслеживаем мышь
 document.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 });
 
-// Если мышь ушла — частицы не реагируют
 document.addEventListener('mouseleave', () => {
     mouse.x = null;
     mouse.y = null;
 });
 
-// Создаём частицы
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -472,17 +280,14 @@ class Particle {
     }
 
     update() {
-        // Движение
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Зацикливание по краям
         if (this.x < 0) this.x = canvas.width;
         if (this.x > canvas.width) this.x = 0;
         if (this.y < 0) this.y = canvas.height;
         if (this.y > canvas.height) this.y = 0;
 
-        // Реакция на мышь
         if (mouse.x !== null && mouse.y !== null) {
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
@@ -504,7 +309,6 @@ class Particle {
     }
 }
 
-// Создаём частицы
 function createParticles() {
     const count = Math.floor((canvas.width * canvas.height) / 12000);
     particles = [];
@@ -516,7 +320,6 @@ function createParticles() {
 createParticles();
 window.addEventListener('resize', createParticles);
 
-// Соединяем линиями близкие частицы
 function connectParticles() {
     const maxDistance = 120;
     for (let i = 0; i < particles.length; i++) {
@@ -538,32 +341,22 @@ function connectParticles() {
     }
 }
 
-// Анимация
 function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-    });
-
+    particles.forEach(p => { p.update(); p.draw(); });
     connectParticles();
     requestAnimationFrame(animateParticles);
 }
 
 animateParticles();
+
 // === РЕЖИМ ОДНОЙ КАРТИНКИ ===
 
 let singleMode = false;
-let activeCategory = null; // 'moodboard', 'style' или 'gothic'
+let activeCategory = null;
 
 document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.stopPropagation();
-            toggleSingleMode(this);
-            return;
-        }
         toggleSingleMode(this);
     });
 });
@@ -571,22 +364,20 @@ document.querySelectorAll('.card').forEach(card => {
 function toggleSingleMode(selectedCard) {
     const allCards = document.querySelectorAll('.card');
     const gallery = document.querySelector('.gallery');
-    const container = document.querySelector('.container');
     const counter = document.querySelector('.counter');
     const title = document.querySelector('h1');
+    const saveBtn = document.querySelector('.save-btn');
+    const favoritesSection = document.querySelector('.favorites-section');
+    const undoAllBtn = document.getElementById('undo-all-btn');
     
     if (!singleMode) {
-        // Определяем категорию по h2 внутри карточки
         const categoryText = selectedCard.querySelector('h2').textContent.toLowerCase();
         if (categoryText === 'moodboard') activeCategory = 'moodboard';
         if (categoryText === 'style') activeCategory = 'style';
         if (categoryText === 'gothic') activeCategory = 'gothic';
         
-        // Скрываем остальные карточки
         allCards.forEach(card => {
-            if (card !== selectedCard) {
-                card.style.display = 'none';
-            }
+            if (card !== selectedCard) card.style.display = 'none';
         });
         
         selectedCard.classList.add('single-mode');
@@ -594,11 +385,11 @@ function toggleSingleMode(selectedCard) {
         gallery.style.maxWidth = '600px';
         gallery.style.margin = '0 auto';
         
-        // Удаляем старую кнопку
-        const oldButton = document.querySelector('button');
-        oldButton.remove();
+        // Удаляем все кнопки вне карточек
+        const oldButtons = document.querySelectorAll('.container > button, .single-buttons');
+        oldButtons.forEach(b => b.remove());
         
-        // Создаём контейнер для двух кнопок
+        // Создаём контейнер для кнопок
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'single-buttons';
         buttonContainer.style.cssText = 'display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;';
@@ -608,31 +399,52 @@ function toggleSingleMode(selectedCard) {
         genOneBtn.textContent = 'Generate One';
         genOneBtn.setAttribute('onclick', 'generateOne()');
         
+        // Кнопка Undo One
+        const undoOneBtn = document.createElement('button');
+        undoOneBtn.textContent = '↩ Undo';
+        undoOneBtn.id = 'undo-one-btn';
+        undoOneBtn.setAttribute('onclick', 'undoOne()');
+        undoOneBtn.style.opacity = singleHistoryIndex < 0 ? '0.3' : '1';
+        undoOneBtn.style.cursor = singleHistoryIndex < 0 ? 'default' : 'pointer';
+        
         // Кнопка Show All
         const showAllBtn = document.createElement('button');
         showAllBtn.textContent = 'Show All';
         showAllBtn.setAttribute('onclick', 'showAllCards()');
         
         buttonContainer.appendChild(genOneBtn);
+        buttonContainer.appendChild(undoOneBtn);
         buttonContainer.appendChild(showAllBtn);
-        
-        // Вставляем после галереи
         gallery.after(buttonContainer);
         
-        // Прячем счётчик и заголовок
+        // Прячем элементы
         counter.style.display = 'none';
         title.style.display = 'none';
+        if (saveBtn) saveBtn.style.display = 'none';
+        if (undoAllBtn) undoAllBtn.style.display = 'none';
+        if (favoritesSection) favoritesSection.style.display = 'none';
         
         singleMode = true;
+    } else {
+        showAllCards();
     }
 }
 
 function generateOne() {
-    const cards = document.querySelectorAll('.card img');
     const singleCard = document.querySelector('.card:not([style*="display: none"])');
     const singleImg = singleCard.querySelector('img');
     
-    // Анимация загрузки
+    // Сохраняем текущее в историю одиночных
+    const currentSrc = singleImg.src;
+    singleHistory = singleHistory.slice(0, singleHistoryIndex + 1);
+    singleHistory.push({ category: activeCategory, src: currentSrc });
+    singleHistoryIndex = singleHistory.length - 1;
+    
+    if (singleHistory.length > 20) {
+        singleHistory.shift();
+        singleHistoryIndex--;
+    }
+    
     singleImg.classList.add('loading');
     
     let imageArray;
@@ -640,21 +452,15 @@ function generateOne() {
     if (activeCategory === 'style') imageArray = styleImages;
     if (activeCategory === 'gothic') imageArray = gothicImages;
     
-    setTimeout(() => {
-        singleImg.src = randomImage(imageArray);
-    }, 200);
+    setTimeout(() => { singleImg.src = randomImage(imageArray); }, 200);
+    setTimeout(() => { singleImg.classList.remove('loading'); }, 600);
     
-    setTimeout(() => {
-        singleImg.classList.remove('loading');
-    }, 600);
-    
-    // Обновляем счётчик
     count++;
     document.getElementById("counter-value").textContent = count;
-    
-    // Сохраняем
     localStorage.setItem(activeCategory, singleImg.src);
     localStorage.setItem('genCount', count);
+    
+    updateUndoButtons();
 }
 
 function showAllCards() {
@@ -663,31 +469,205 @@ function showAllCards() {
     const counter = document.querySelector('.counter');
     const title = document.querySelector('h1');
     
-    // Показываем все карточки
     allCards.forEach(card => {
         card.style.display = '';
         card.classList.remove('single-mode');
     });
     
-    // Возвращаем сетку
     gallery.style.gridTemplateColumns = '';
     gallery.style.maxWidth = '';
     gallery.style.margin = '';
     
-    // Удаляем контейнер с кнопками
+    // Удаляем контейнер с кнопками single mode
     const buttonContainer = document.querySelector('.single-buttons');
     if (buttonContainer) buttonContainer.remove();
     
-    // Создаём обычную кнопку Generate
-    const newButton = document.createElement('button');
-    newButton.textContent = 'Generate';
-    newButton.setAttribute('onclick', 'generateImages()');
-    gallery.after(newButton);
+    // Удаляем старые кнопки
+    const existingButtons = document.querySelectorAll('.container > button');
+    existingButtons.forEach(b => b.remove());
+    
+    // Создаём кнопку Generate
+    const generateBtn = document.createElement('button');
+    generateBtn.textContent = 'Generate';
+    generateBtn.setAttribute('onclick', 'generateImages()');
+    
+    // Создаём кнопку Undo All
+    const undoAllBtn = document.createElement('button');
+    undoAllBtn.textContent = '↩ Undo All';
+    undoAllBtn.id = 'undo-all-btn';
+    undoAllBtn.className = 'undo-btn';
+    undoAllBtn.setAttribute('onclick', 'undoAll()');
+    undoAllBtn.style.opacity = historyIndex < 0 ? '0.3' : '1';
+    undoAllBtn.style.cursor = historyIndex < 0 ? 'default' : 'pointer';
+    
+    // Создаём кнопку Save
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = '★ Save Concept';
+    saveBtn.className = 'save-btn';
+    saveBtn.setAttribute('onclick', 'saveToFavorites()');
+    
+    // Вставляем после галереи
+    gallery.after(undoAllBtn);
+    gallery.after(saveBtn);
+    gallery.after(generateBtn);
     
     // Показываем счётчик и заголовок
     counter.style.display = '';
     title.style.display = '';
     
+    // Показываем избранное
+    const favoritesSection = document.querySelector('.favorites-section');
+    if (favoritesSection) favoritesSection.style.display = '';
+    
     singleMode = false;
     activeCategory = null;
+}
+
+// === ИЗБРАННОЕ ===
+
+function saveToFavorites() {
+    const concept = {
+        moodboard: document.getElementById("moodboard-img").src,
+        style: document.getElementById("style-img").src,
+        gothic: document.getElementById("gothic-img").src,
+        date: new Date().toLocaleString('ru-RU'),
+        id: Date.now()
+    };
+    
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    favorites.unshift(concept);
+    if (favorites.length > 20) favorites = favorites.slice(0, 20);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+    const saveBtn = document.querySelector('.save-btn');
+    if (saveBtn) {
+        saveBtn.textContent = '★ Saved!';
+        saveBtn.style.color = '#fbbf24';
+        saveBtn.style.borderColor = '#fbbf24';
+        setTimeout(() => {
+            saveBtn.textContent = '★ Save Concept';
+            saveBtn.style.color = '';
+            saveBtn.style.borderColor = '';
+        }, 1500);
+    }
+    
+    renderFavorites();
+}
+
+function renderFavorites() {
+    const grid = document.getElementById('favorites-grid');
+    const noFav = document.getElementById('no-favorites');
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    
+    if (!grid) return;
+    
+    if (favorites.length === 0) {
+        grid.innerHTML = '';
+        if (noFav) noFav.style.display = 'block';
+        return;
+    }
+    
+    if (noFav) noFav.style.display = 'none';
+    
+    grid.innerHTML = favorites.map(f => `
+        <div class="favorite-item">
+            <div class="fav-images">
+                <img src="${f.moodboard}" alt="Moodboard" loading="lazy">
+                <img src="${f.style}" alt="Style" loading="lazy">
+                <img src="${f.gothic}" alt="Gothic" loading="lazy">
+            </div>
+            <div class="fav-info">
+                <span class="fav-date">${f.date}</span>
+                <button class="fav-restore" onclick="restoreFavoriteById(${f.id})">Restore</button>
+                <button class="fav-delete" onclick="deleteFavoriteById(${f.id})">✕</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function restoreFavoriteById(id) {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const concept = favorites.find(f => f.id === id);
+    if (concept) {
+        document.getElementById("moodboard-img").src = concept.moodboard;
+        document.getElementById("style-img").src = concept.style;
+        document.getElementById("gothic-img").src = concept.gothic;
+        localStorage.setItem('moodboard', concept.moodboard);
+        localStorage.setItem('style', concept.style);
+        localStorage.setItem('gothic', concept.gothic);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function deleteFavoriteById(id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    favorites = favorites.filter(f => f.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    renderFavorites();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderFavorites();
+});
+// === UNDO ДЛЯ ВСЕХ ТРЁХ ===
+
+function undoAll() {
+    if (historyIndex < 0) return;
+    
+    const previousState = history[historyIndex];
+    historyIndex--;
+    
+    const cards = document.querySelectorAll('.card img');
+    cards.forEach(img => img.classList.add('loading'));
+    
+    setTimeout(() => {
+        document.getElementById("moodboard-img").src = previousState.moodboard;
+        document.getElementById("style-img").src = previousState.style;
+        document.getElementById("gothic-img").src = previousState.gothic;
+    }, 100);
+    
+    setTimeout(() => {
+        cards.forEach(img => img.classList.remove('loading'));
+    }, 400);
+    
+    updateUndoButtons();
+}
+
+// === UNDO ДЛЯ ОДНОЙ ===
+
+function undoOne() {
+    if (singleHistoryIndex < 0) return;
+    
+    const previous = singleHistory[singleHistoryIndex];
+    singleHistoryIndex--;
+    
+    let imgId;
+    if (previous.category === 'moodboard') imgId = 'moodboard-img';
+    if (previous.category === 'style') imgId = 'style-img';
+    if (previous.category === 'gothic') imgId = 'gothic-img';
+    
+    const img = document.getElementById(imgId);
+    img.classList.add('loading');
+    
+    setTimeout(() => { img.src = previous.src; }, 100);
+    setTimeout(() => { img.classList.remove('loading'); }, 400);
+    
+    updateUndoButtons();
+}
+
+// === ОБНОВЛЕНИЕ КНОПОК UNDO ===
+
+function updateUndoButtons() {
+    const undoAllBtn = document.getElementById('undo-all-btn');
+    const undoOneBtn = document.getElementById('undo-one-btn');
+    
+    if (undoAllBtn) {
+        undoAllBtn.style.opacity = historyIndex < 0 ? '0.3' : '1';
+        undoAllBtn.style.cursor = historyIndex < 0 ? 'default' : 'pointer';
+    }
+    
+    if (undoOneBtn) {
+        undoOneBtn.style.opacity = singleHistoryIndex < 0 ? '0.3' : '1';
+        undoOneBtn.style.cursor = singleHistoryIndex < 0 ? 'default' : 'pointer';
+    }
 }

@@ -16,7 +16,8 @@
 <body>
 
     <canvas id="particles"></canvas>
-<div class="noise"></div>
+    <div class="noise"></div>
+    
     <div class="container">
         <h1>Random Inspiration</h1>
 
@@ -37,12 +38,18 @@
             </div>
         </div>
 
-        <button onclick="generateImages()">
-            Generate
-        </button>
+        <button onclick="generateImages()">Generate</button>
+        <button onclick="undoAll()" id="undo-all-btn" class="undo-btn">↩ Undo All</button>
+        <button onclick="saveToFavorites()" class="save-btn">★ Save Concept</button>
 
         <p class="counter">Generate #<span id="counter-value">1</span></p>
 
+        <!-- Избранное -->
+        <div class="favorites-section">
+            <h3>★ Saved Concepts</h3>
+            <div class="favorites-grid" id="favorites-grid"></div>
+            <p class="no-favorites" id="no-favorites">No saved concepts yet. Generate and save your first one!</p>
+        </div>
     </div>
 
     <script src="script.js"></script>
