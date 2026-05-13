@@ -1,5 +1,5 @@
 let count = 1;
-```javascript
+
 const moodboardImages = [
     "images/moodboard/1.jpg",
     "images/moodboard/2.jpg",
@@ -161,7 +161,7 @@ const moodboardImages = [
     "images/moodboard/158.jpg",
     "images/moodboard/159.jpg"
 ];
-```
+
 
 const styleImages = [
     "images/style/1.jpg",
