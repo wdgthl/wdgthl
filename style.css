@@ -13,7 +13,17 @@ canvas#particles {
     z-index: -1;
     pointer-events: none;
 }
-
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+}
 body {
     margin: 0;
     background-image: url('images/background/1.jpg');
@@ -98,23 +108,32 @@ button {
     display: block;
     margin: 28px auto 0;
     padding: 14px 38px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: none;
     border-radius: 50px;
-    background: transparent;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
+    background-size: 300% 300%;
+    animation: gradientShift 4s ease infinite;
     color: white;
     font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
 }
 
 button:hover {
-    background: white;
-    color: black;
-    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+    animation: gradientShift 2s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .counter {
@@ -125,8 +144,37 @@ button:hover {
     font-size: 12px;
     letter-spacing: 2px;
     color: rgba(255, 255, 255, 0.4);
+
+/* Кнопки в режиме одной картинки */
+.single-buttons button {
+    margin: 0;
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
 }
 
+.single-buttons button:first-child {
+    background: white;
+    color: black;
+    border: none;
+}
+
+.single-buttons button:first-child:hover {
+    background: #e0e0e0;
+    color: black;
+}
+
+.single-buttons button:last-child {
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.single-buttons button:last-child:hover {
+    color: white;
+    border-color: white;
+    background: transparent;
+}
 /* ---------- TABLET ---------- */
 
 @media (max-width: 900px) {

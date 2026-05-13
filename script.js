@@ -50,8 +50,28 @@ const moodboardImages = [
     "images/moodboard/48.jpg",
     "images/moodboard/49.jpg",
     "images/moodboard/50.jpg",
-    "images/moodboard/51.jpg"
-    
+    "images/moodboard/51.jpg",
+    "images/moodboard/52.jpg",
+    "images/moodboard/53.jpg",
+    "images/moodboard/53.jpg",
+    "images/moodboard/54.jpg",
+    "images/moodboard/55.jpg",
+    "images/moodboard/56.jpg",
+    "images/moodboard/57.jpg",
+    "images/moodboard/58.jpg",
+    "images/moodboard/59.jpg",
+    "images/moodboard/60.jpg",
+    "images/moodboard/61.jpg",
+    "images/moodboard/62.jpg",
+    "images/moodboard/63.jpg",
+    "images/moodboard/64.jpg",
+    "images/moodboard/65.jpg",
+    "images/moodboard/66.jpg",
+    "images/moodboard/67.jpg",
+    "images/moodboard/68.jpg",
+    "images/moodboard/69.jpg",
+    "images/moodboard/70.jpg",
+    "images/moodboard/71.jpg",
 ];
 
 const styleImages = [
@@ -105,7 +125,28 @@ const styleImages = [
     "images/style/48.jpg",
     "images/style/49.jpg",
     "images/style/50.jpg",
-    "images/style/51.jpg"
+    "images/style/51.jpg",
+    "images/style/52.jpg",
+    "images/style/53.jpg",
+    "images/style/54.jpg",
+    "images/style/55.jpg",
+    "images/style/56.jpg",
+    "images/style/57.jpg",
+    "images/style/58.jpg",
+    "images/style/59.jpg",
+    "images/style/60.jpg",
+    "images/style/61.jpg",
+    "images/style/62.jpg",
+    "images/style/63.jpg",
+    "images/style/64.jpg",
+    "images/style/65.jpg",
+    "images/style/66.jpg",
+    "images/style/67.jpg",
+    "images/style/68.jpg",
+    "images/style/69.jpg",
+    "images/style/70.jpg",
+    "images/style/71.jpg"
+
 ];
 
 const gothicImages = [
@@ -159,7 +200,27 @@ const gothicImages = [
     "images/gothic/48.jpg",
     "images/gothic/49.jpg",
     "images/gothic/50.jpg",
-    "images/gothic/51.jpg"
+    "images/gothic/51.jpg",
+ "images/gothic/52.jpg",
+ "images/gothic/53.jpg",
+ "images/gothic/54.jpg",
+ "images/gothic/55.jpg",
+ "images/gothic/56.jpg",
+ "images/gothic/57.jpg",
+ "images/gothic/58.jpg",
+ "images/gothic/59.jpg",
+ "images/gothic/60.jpg",
+ "images/gothic/61.jpg",
+ "images/gothic/62.jpg",
+ "images/gothic/63.jpg",
+ "images/gothic/64.jpg",
+ "images/gothic/65.jpg",
+ "images/gothic/66.jpg",
+ "images/gothic/67.jpg",
+ "images/gothic/68.jpg",
+ "images/gothic/69.jpg",
+ "images/gothic/70.jpg",
+ "images/gothic/71.jpg"
 
 ];
 
@@ -344,3 +405,142 @@ function animateParticles() {
 }
 
 animateParticles();
+// === РЕЖИМ ОДНОЙ КАРТИНКИ ===
+
+let singleMode = false;
+let activeCategory = null; // 'moodboard', 'style' или 'gothic'
+
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.stopPropagation();
+            toggleSingleMode(this);
+            return;
+        }
+        toggleSingleMode(this);
+    });
+});
+
+function toggleSingleMode(selectedCard) {
+    const allCards = document.querySelectorAll('.card');
+    const gallery = document.querySelector('.gallery');
+    const container = document.querySelector('.container');
+    const counter = document.querySelector('.counter');
+    const title = document.querySelector('h1');
+    
+    if (!singleMode) {
+        // Определяем категорию по h2 внутри карточки
+        const categoryText = selectedCard.querySelector('h2').textContent.toLowerCase();
+        if (categoryText === 'moodboard') activeCategory = 'moodboard';
+        if (categoryText === 'style') activeCategory = 'style';
+        if (categoryText === 'gothic') activeCategory = 'gothic';
+        
+        // Скрываем остальные карточки
+        allCards.forEach(card => {
+            if (card !== selectedCard) {
+                card.style.display = 'none';
+            }
+        });
+        
+        selectedCard.classList.add('single-mode');
+        gallery.style.gridTemplateColumns = '1fr';
+        gallery.style.maxWidth = '600px';
+        gallery.style.margin = '0 auto';
+        
+        // Удаляем старую кнопку
+        const oldButton = document.querySelector('button');
+        oldButton.remove();
+        
+        // Создаём контейнер для двух кнопок
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'single-buttons';
+        buttonContainer.style.cssText = 'display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;';
+        
+        // Кнопка Generate One
+        const genOneBtn = document.createElement('button');
+        genOneBtn.textContent = 'Generate One';
+        genOneBtn.setAttribute('onclick', 'generateOne()');
+        
+        // Кнопка Show All
+        const showAllBtn = document.createElement('button');
+        showAllBtn.textContent = 'Show All';
+        showAllBtn.setAttribute('onclick', 'showAllCards()');
+        
+        buttonContainer.appendChild(genOneBtn);
+        buttonContainer.appendChild(showAllBtn);
+        
+        // Вставляем после галереи
+        gallery.after(buttonContainer);
+        
+        // Прячем счётчик и заголовок
+        counter.style.display = 'none';
+        title.style.display = 'none';
+        
+        singleMode = true;
+    }
+}
+
+function generateOne() {
+    const cards = document.querySelectorAll('.card img');
+    const singleCard = document.querySelector('.card:not([style*="display: none"])');
+    const singleImg = singleCard.querySelector('img');
+    
+    // Анимация загрузки
+    singleImg.classList.add('loading');
+    
+    let imageArray;
+    if (activeCategory === 'moodboard') imageArray = moodboardImages;
+    if (activeCategory === 'style') imageArray = styleImages;
+    if (activeCategory === 'gothic') imageArray = gothicImages;
+    
+    setTimeout(() => {
+        singleImg.src = randomImage(imageArray);
+    }, 200);
+    
+    setTimeout(() => {
+        singleImg.classList.remove('loading');
+    }, 600);
+    
+    // Обновляем счётчик
+    count++;
+    document.getElementById("counter-value").textContent = count;
+    
+    // Сохраняем
+    localStorage.setItem(activeCategory, singleImg.src);
+    localStorage.setItem('genCount', count);
+}
+
+function showAllCards() {
+    const allCards = document.querySelectorAll('.card');
+    const gallery = document.querySelector('.gallery');
+    const counter = document.querySelector('.counter');
+    const title = document.querySelector('h1');
+    
+    // Показываем все карточки
+    allCards.forEach(card => {
+        card.style.display = '';
+        card.classList.remove('single-mode');
+    });
+    
+    // Возвращаем сетку
+    gallery.style.gridTemplateColumns = '';
+    gallery.style.maxWidth = '';
+    gallery.style.margin = '';
+    
+    // Удаляем контейнер с кнопками
+    const buttonContainer = document.querySelector('.single-buttons');
+    if (buttonContainer) buttonContainer.remove();
+    
+    // Создаём обычную кнопку Generate
+    const newButton = document.createElement('button');
+    newButton.textContent = 'Generate';
+    newButton.setAttribute('onclick', 'generateImages()');
+    gallery.after(newButton);
+    
+    // Показываем счётчик и заголовок
+    counter.style.display = '';
+    title.style.display = '';
+    
+    singleMode = false;
+    activeCategory = null;
+}
