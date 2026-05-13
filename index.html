@@ -4,26 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Inspiration</title>
+    
+    <!-- Иконка -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✦</text></svg>">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <canvas id="particles"></canvas>
 
     <div class="container">
         <h1>Random Inspiration</h1>
 
         <div class="gallery">
             <div class="card">
-                <h2 style="color:white;">moodboard</h2>
+                <h2>Moodboard</h2>
                 <img id="moodboard-img" src="" alt="">
             </div>
 
             <div class="card">
-                <h2 style="color:white;">style</h2>
+                <h2>Style</h2>
                 <img id="style-img" src="" alt="">
             </div>
 
             <div class="card">
-                <h2 style="color:white;">palette</h2>
+                <h2>Gothic</h2>
                 <img id="gothic-img" src="" alt="">
             </div>
         </div>
@@ -31,6 +40,9 @@
         <button onclick="generateImages()">
             Generate
         </button>
+
+        <p class="counter">Generate #<span id="counter-value">1</span></p>
+
     </div>
 
     <script src="script.js"></script>

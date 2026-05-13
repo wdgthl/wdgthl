@@ -1,3 +1,4 @@
+let count = 1;
 const moodboardImages = [
     "images/moodboard/1.jpg",
     "images/moodboard/2.jpg",
@@ -167,14 +168,179 @@ function randomImage(array) {
 }
 
 function generateImages() {
-    document.getElementById("moodboard-img").src =
-        randomImage(moodboardImages);
-
-    document.getElementById("style-img").src =
-        randomImage(styleImages);
-
-    document.getElementById("gothic-img").src =
-        randomImage(gothicImages);
+    const cards = document.querySelectorAll('.card img');
+    
+    cards.forEach(img => img.classList.add('loading'));
+    
+    setTimeout(() => {
+        document.getElementById("moodboard-img").src =
+            randomImage(moodboardImages);
+        document.getElementById("style-img").src =
+            randomImage(styleImages);
+        document.getElementById("gothic-img").src =
+            randomImage(gothicImages);
+    }, 200);
+    
+    setTimeout(() => {
+        cards.forEach(img => img.classList.remove('loading'));
+    }, 600);
+    
+    count++;
+    document.getElementById("counter-value").textContent = count;
+    
+    localStorage.setItem('moodboard', document.getElementById("moodboard-img").src);
+    localStorage.setItem('style', document.getElementById("style-img").src);
+    localStorage.setItem('gothic', document.getElementById("gothic-img").src);
+    localStorage.setItem('genCount', count);
 }
 
-generateImages();
+function loadSavedImages() {
+    const savedMoodboard = localStorage.getItem('moodboard');
+    const savedStyle = localStorage.getItem('style');
+    const savedGothic = localStorage.getItem('gothic');
+    const savedCount = localStorage.getItem('genCount');
+    
+    const cards = document.querySelectorAll('.card img');
+    
+    if (savedMoodboard) {
+        cards.forEach(img => img.classList.add('loading'));
+        
+        setTimeout(() => {
+            document.getElementById("moodboard-img").src = savedMoodboard;
+            document.getElementById("style-img").src = savedStyle;
+            document.getElementById("gothic-img").src = savedGothic;
+        }, 200);
+        
+        setTimeout(() => {
+            cards.forEach(img => img.classList.remove('loading'));
+        }, 600);
+        
+        count = parseInt(savedCount) || 1;
+        document.getElementById("counter-value").textContent = count;
+    } else {
+        generateImages();
+    }
+}
+
+loadSavedImages();
+// === ЧАСТИЦЫ НА ФОНЕ ===
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+let mouse = { x: null, y: null, radius: 100 };
+
+// Размер canvas на весь экран
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Отслеживаем мышь
+document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+// Если мышь ушла — частицы не реагируют
+document.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+// Создаём частицы
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.2;
+    }
+
+    update() {
+        // Движение
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Зацикливание по краям
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+
+        // Реакция на мышь
+        if (mouse.x !== null && mouse.y !== null) {
+            const dx = this.x - mouse.x;
+            const dy = this.y - mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+                const force = (mouse.radius - distance) / mouse.radius;
+                this.x += dx * force * 0.03;
+                this.y += dy * force * 0.03;
+            }
+        }
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+// Создаём частицы
+function createParticles() {
+    const count = Math.floor((canvas.width * canvas.height) / 12000);
+    particles = [];
+    for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+    }
+}
+
+createParticles();
+window.addEventListener('resize', createParticles);
+
+// Соединяем линиями близкие частицы
+function connectParticles() {
+    const maxDistance = 120;
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < maxDistance) {
+                const opacity = 1 - distance / maxDistance;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+// Анимация
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    connectParticles();
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
